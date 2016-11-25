@@ -7,11 +7,11 @@ module.exports = {
         db: 10
     },
     orm: {
-        database: "squarelife",
+        database: "local",
         protocol: "mysql",
-        host: "118.178.224.171",
+        host: "127.0.0.1",
         user: "root",
-        password: "123456",
+        password: "ljy2996892A",
         query: {pool: true, debug: false}
     }
 }

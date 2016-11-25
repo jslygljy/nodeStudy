@@ -1,33 +1,37 @@
 //express_demo.js 文件
 var express = require('express');
-var config = require('./conf');
-var mysql = require('mysql');
 var app = express();
+var autoroute =require('express-autoroute')
+var http =require('http')
 
-var pool = mysql.createPool(config.orm);
 
-var selectSQL = 'select * from tbbase_user limit 10';
+//app.configure(function () {
+//    app.set('port', 8001);
+//    app.use(function (req, res, next) {
+//        res.setHeader("Access-Control-Allow-Origin", "*");
+//        res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
+//        res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, Authorization');
+//
+//    });
+//});
+//app.set('port', 8001);
+//    app.use(function (req, res, next) {
+//        res.setHeader("Access-Control-Allow-Origin", "*");
+//        res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
+//        res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, Authorization');
+//
+//    });
+autoroute(app, { throwErrors: true });
+http.createServer(app).listen(8001, function () {
+    console.log("start express")
+});
 
-pool.getConnection(function (err, conn) {
-    if(err){
-        return
-    }
-    console.log(conn.query);
-    conn.query(selectSQL,function(err,rows){
-        if (err) console.log(err);
-        console.log("SELECT ==> ");
-        for (var i in rows) {
-            console.log(rows[i]);
-        }
-        conn.release();
-    });
-})
 
-var server = app.listen(8001, function () {
-
-  var host = server.address().address
-  var port = server.address().port
-
-  console.log("应用实例，访问地址为 http://%s:%s", host, port)
-
-})
+//var server = app.listen(8001, function () {
+//
+//  var host = server.address().address
+//  var port = server.address().port
+//
+//  console.log("应用实例，访问地址为 http://%s:%s", host, port)
+//
+//})

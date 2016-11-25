@@ -1,9 +1,19 @@
-var express = require('express');
-var router = express.Router();
+var common = require('../common/common')
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+exports.autoroute={
+  get:{
+    '/test/api/login':loginreult
+  }
+}
+function loginreult(req,res){
+    console.log(req.route)
+    var sql = 'select * from user';
+    common.sqlconn(sql,function(err,rows){
+      if (err) console.log(err);
+      for (var i in rows) {
+          res.send()
+      }
+    })
+}
 
-module.exports = router;
+
