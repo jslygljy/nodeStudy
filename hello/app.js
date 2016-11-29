@@ -2,18 +2,25 @@
 var express = require('express');
 var app = express();
 var autoroute =require('express-autoroute')
-var http =require('http')
+var http =require('http');
+var bodyParser = require("body-parser");
 
+// need it...
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(function(req,res,next){
+    res.setHeader('Access-Control-Allow-Origin','*');
+    next();
+})
 
-//app.configure(function () {
-//    app.set('port', 8001);
+// app.configure(function () {
 //    app.use(function (req, res, next) {
 //        res.setHeader("Access-Control-Allow-Origin", "*");
 //        res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
 //        res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, Authorization');
 //
 //    });
-//});
+// });
+
 //app.set('port', 8001);
 //    app.use(function (req, res, next) {
 //        res.setHeader("Access-Control-Allow-Origin", "*");
